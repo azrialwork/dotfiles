@@ -1,6 +1,7 @@
 # =============================================================================
-# ~/.bashrc — WSL shell configuration (root)
+# ~/.bashrc — Termux shell configuration
 # Theme: Mercury (opencode mercury theme) — truecolor
+# Source: https://github.com/azrialwork/dotfiles (adapted for Termux)
 # =============================================================================
 
 # -----------------------------------------------------------------------------
@@ -72,31 +73,16 @@ export LESS_TERMCAP_us=$'\e['${MERCURY_INFO}'m'      # underline
 export LESS_TERMCAP_ue=$'\e[0m'                      # end underline
 
 # -----------------------------------------------------------------------------
-# Prompt (PS1)
+# Starship prompt (Mercury theme, see ~/.config/starship.toml)
 # -----------------------------------------------------------------------------
-__mercury_prompt() {
-    local last=$?
-    local reset='\[\e[0m\]'
-    local primary='\[\e['${MERCURY_PRIMARY}'m\]'
-    local success='\[\e['${MERCURY_SUCCESS}'m\]'
-    local error='\[\e['${MERCURY_ERROR}'m\]'
+eval "$(starship init bash)"
 
-    # git branch (if inside a git repo)
-    local branch=""
-    local b
-    b=$(git symbolic-ref --short HEAD 2>/dev/null) || b=$(git rev-parse --short HEAD 2>/dev/null)
-    [ -n "$b" ] && branch="${success}(${b})${reset} "
-
-    # exit status of the last command
-    local status=""
-    [ "$last" -ne 0 ] && status="${error}✗ ${last}${reset} "
-
-    # prompt symbol: $ for regular user, # for root
-    local dollar='\$'
-
-    PS1="\[\e]0;\u: \w\a\]${success}\u${reset} ${primary}\w${reset} ${branch}${status}${primary}${dollar}${reset} "
+# Runs before each prompt: set the terminal title and export the last exit
+# status for the custom exit_status module (hides 0 and 127).
+starship_precmd_user_func() {
+    printf '\033]0;termux: %s\007' "${PWD/#$HOME/\~}"
+    export STARSHIP_LAST_STATUS="${STARSHIP_CMD_STATUS:-0}"
 }
-PROMPT_COMMAND=__mercury_prompt
 
 # -----------------------------------------------------------------------------
 # Aliases
