@@ -31,3 +31,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/.opencode/bin:$PATH"
 
 eval "$(starship init bash)"
+
+eval "$(direnv hook bash)"
