@@ -1,43 +1,27 @@
-# Starship prompt configuration — Mercury theme
-# Adopted from azrialwork/dotfiles (windows-terminal/settings.json + .bashrc)
-# Mercury palette:
-#   primary #8DA4F5 | success #77C599 | warning #FC9B6F | error #FC92B4
-#   info #77BECF | purple #A7B6F8 | weak #9D9DA8 | ink #DDDDE5 | bg #171721
-
-"$schema" = "https://starship.rs/config-schema.json"
-
-# Single-line prompt, matching the original Mercury bash prompt
 add_newline = false
 
-# Prompt order: path, git branch, git status, exit status, prompt symbol
 format = """
-$directory$git_branch$git_status${custom.exit_status}$character"""
+$username\
+$directory\
+$git_branch\
+$git_status\
+$character"""
 
 [character]
-success_symbol = '[\$](bold #8DA4F5)'
-error_symbol = '[\$](bold #8DA4F5)'
-vimcmd_symbol = '[\$](bold #9D9DA8)'
-vimcmd_visual_symbol = '[\$](bold #9D9DA8)'
-vimcmd_replace_symbol = '[\$](bold #9D9DA8)'
+success_symbol = '[\$](bold green)'
+error_symbol  = '[\$](bold red)'
 
 [directory]
-style = "#8DA4F5"
-truncation_length = 10
-truncation_symbol = "…/"
-truncate_to_repo = false
+truncation_length = 1
+truncate_to_repo   = true
+read_only          = " 🔒"
 
 [git_branch]
-symbol = ""
-style = "#77C599"
-format = "[($branch)]($style) "
+format = "[$branch]($style) "
 
 [git_status]
-style = "#FC9B6F"
-format = "[$all_status$ahead_behind]($style)"
+format = '([\[$all_status$ahead_behind\]]($style) )'
 
-# Exit status: red "✗ N" for failures, hidden for 0 and 127 (command not found).
-# The status is exported by starship_precmd_user_func in ~/.bashrc.
-[custom.exit_status]
-when = 'test -n "$STARSHIP_LAST_STATUS" && test "$STARSHIP_LAST_STATUS" -ne 0 && test "$STARSHIP_LAST_STATUS" -ne 127'
-command = 'printf "✗ %s " "$STARSHIP_LAST_STATUS"'
-style = "#FC92B4"
+[username]
+show_always = false
+format      = "[$user]($style)@"
