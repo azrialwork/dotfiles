@@ -52,23 +52,24 @@ style              = "bold primary"
 read_only_style    = "error"
 
 [git_branch]
-format = "[$branch]($style) "
+format = '[\[](text_muted)[$branch](info)'
 style  = "bold secondary"
 
 [git_status]
-format = '([\[$all_status$ahead_behind\]]($style) )'
+format = '[$all_status$ahead_behind](warning)[\]](text_muted) '
 style  = "text_muted"
-conflicted   = "error"
-ahead        = "info"
-behind       = "warning"
-diverged     = "warning"
-up_to_date   = "success"
-untracked    = "warning"
-stashed      = "info"
-modified     = "warning"
-deleted      = "error"
-renamed      = "info"
-typechanged  = "warning"
+conflicted  = " *"
+stashed     = " *"
+deleted     = " *"
+renamed     = " *"
+modified    = " *"
+typechanged = " *"
+staged      = " *"
+untracked   = " *"
+ahead       = " *"
+behind      = " *"
+diverged    = " *"
+up_to_date  = ""
 
 [username]
 show_always = false
