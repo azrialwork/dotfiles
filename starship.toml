@@ -41,7 +41,7 @@ syntax_operator    = "#ff7b72"
 syntax_punctuation = "#c9d1d9"
 
 [character]
-success_symbol = '[\$](bold primary)'
+success_symbol = '[\$](bold success)'
 error_symbol   = '[\$](bold error)'
 
 [directory]
