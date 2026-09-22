@@ -9,7 +9,7 @@ HISTFILESIZE=2000
 shopt -s histappend
 shopt -s checkwinsize
 
-if [ -x /usr/bin/dircolors ]; then
+if command -v dircolors >/dev/null 2>&1; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
 fi
